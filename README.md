@@ -81,9 +81,38 @@ Event 任务，这里的任务主要是耗时任务，主要分为普通耗时�
   
   
   * Activity、Fragment入口方法
-  ···Java
+  
+   ```Java
   	@Override
     public void initView(View view, Bundle bundle) {}
     
-  ···
+  ```
   
+  * 数据初始化方法
+   ```Java
+   @Override
+    public void initData(Bundle bundle) {
+      
+    }  
+   ```
+   * 指定接收命令方法，用于指定该界面只接收哪些命令
+   
+   ```Java
+    @Override
+    public int[] registReceiveCmdIds() {
+        return new int[0];
+    }
+    ```
+    * 命令接收方法
+    ```Java
+    @Override
+    public void onHandCmd(int cmdId, Object data) {
+    }
+    ```
+    
+    * 任务接收方法
+    ```Java
+    @Override
+    public void eventHandle(int taskId, Object data) {
+    }
+    ```

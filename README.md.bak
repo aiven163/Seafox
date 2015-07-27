@@ -1,21 +1,21 @@
 # Seafox
 this is a basic app framework
 
-这是一个简单的App框架，主要实现功能如下：
+����һ���򵥵�App��ܣ���Ҫʵ�ֹ������£�
 
-1、HTTP  主要集合volley框架
-2、View  通过注解对Activity和Fragment中的View赋值，不用再通过findViewById去获取
-3、Command  命令，主要用于Activity，Fragment各自之间的通信
-4、Event 在下面讲解
-
-
-Event 任务，这里的任务主要是耗时任务，主要分为普通耗时任务和网络耗时任务，均在子线程中执行，执行完毕后
-通知View层
+1��HTTP  ��Ҫ����volley���
+2��View  ͨ��ע���Activity��Fragment�е�View��ֵ��������ͨ��findViewByIdȥ��ȡ
+3��Command  �����Ҫ����Activity��Fragment����֮���ͨ��
+4��Event �����潲��
 
 
-1、网络任务：
-   编写一个网络任务类，继承自HttpEvent。
-   实例如下：
+Event ���������������Ҫ�Ǻ�ʱ������Ҫ��Ϊ��ͨ��ʱ����������ʱ���񣬾������߳���ִ�У�ִ����Ϻ�
+֪ͨView��
+
+
+1����������
+   ��дһ�����������࣬�̳���HttpEvent��
+   ʵ�����£�
    
    
    public class ImgGetEvent extends HttpEvent {
@@ -29,7 +29,7 @@ Event 任务，这里的任务主要是耗时任务，主要分为普通耗时�
     }
 
     /**
-     * 设置请求参数
+     * �����������
      * @param arrayList
      * @return
      */
@@ -42,7 +42,7 @@ Event 任务，这里的任务主要是耗时任务，主要分为普通耗时�
     }
 
     /**
-     * 数据解析
+     * ���ݽ���
      * @param s
      * @return
      * @throws EventException
@@ -60,7 +60,7 @@ Event 任务，这里的任务主要是耗时任务，主要分为普通耗时�
     }
 
     /**
-     * 下一个任务执行参数
+     * ��һ������ִ�в���
      * @param arrayList
      * @return
      */

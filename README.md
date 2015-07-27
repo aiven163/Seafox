@@ -73,3 +73,17 @@ Event 任务，这里的任务主要是耗时任务，主要分为普通耗时�
 }
 
 ```
+
+  任务类编写完成了，那么怎么在Activity中使用呢？
+  我们需要编写一个Activity继承自BaseActivity，实现父类的方法，然后在需要执行任务的地方，实例化该任务，并且添加任务参数，最后调用该任务的excute()放假，既可以开始执行任务。<br>
+  我们可以看到activity从父类继承下来了很多方法。下面先介绍一下吧
+  
+  
+  
+  * Activity、Fragment入口方法
+  ···Java
+  	@Override
+    public void initView(View view, Bundle bundle) {}
+    
+  ···
+  

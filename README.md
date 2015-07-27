@@ -82,7 +82,7 @@ Event 任务，这里的任务主要是耗时任务，主要分为普通耗时�
   
   
   
-   * Activity、Fragment入口方法
+   * Activity、Fragment入口方法<br/>
     ```Java
   	 @Override
      public void initView(View view, Bundle bundle) {}
@@ -309,13 +309,13 @@ Event 任务，这里的任务主要是耗时任务，主要分为普通耗时�
     }
   }
   ```
-2、普通任务，
+2、普通任务，<br/>
    普通任务继承自CommonEvent，方法基本和HTTP任务相似，具体操作不再给出实例了。
    
 
 命令
 ========
-* 命令的发送
+* 命令的发送<br/>
   首先构造一个命令，指定他的命令ID
    ```Java
    Cmd cmd=new Cmd(1001);
@@ -332,8 +332,8 @@ Event 任务，这里的任务主要是耗时任务，主要分为普通耗时�
    ```
    这样就将命令发送出去了.
    
-* 命令的接收
-   命令的接收只能在Activity和Fragment中，这个是前提：
+* 命令的接收<br/>
+   命令的接收只能在Activity和Fragment中，这个是前提：<br/>
    首先注册接收命令：
    ```Java
    @Override
@@ -341,7 +341,7 @@ Event 任务，这里的任务主要是耗时任务，主要分为普通耗时�
         return new int[]{1001};
     }
    ```
-   这里注册了接收的命令ID为1001，当然可以接收很多个命令
+   这里注册了接收的命令ID为1001，当然可以接收很多个命令<br/><br/>
    
    只要注册后，命令在其他地方已发送，这个界面将会收到命令，接收命令的入口：
    ```Java

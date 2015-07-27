@@ -75,7 +75,7 @@ Event 任务，这里的任务主要是耗时任务，主要分为普通耗时�
 ```
 
   任务类编写完成了，那么怎么在Activity中使用呢？
-  我们需要编写一个Activity继承自BaseActivity，实现父类的方法，然后在需要执行任务的地方，实例化该任务，并且添加任务参数，最后调用该任务的excute()放假，既可以开始执行任务。<br>
+  我们需要编写一个Activity继承自BaseActivity，实现父类的方法，然后在需要执行任务的地方，实例化该任务，并且添加任务参数，最后调用该任务的excute()放假，既可以开始执行任务。这里注意，如果是Fragment则继承自BaseFragment<br>
   我们可以看到activity从父类继承下来了很多方法。下面先介绍一下吧
   
   
@@ -84,15 +84,12 @@ Event 任务，这里的任务主要是耗时任务，主要分为普通耗时�
     ```Java
   	 @Override
      public void initView(View view, Bundle bundle) {}
-    
     ```
   
    * 数据初始化方法
     ```Java
     @Override
-    public void initData(Bundle bundle) {
-      
-    }  
+    public void initData(Bundle bundle) {}  
     ```
    * 指定接收命令方法，用于指定该界面只接收哪些命令
    
@@ -105,16 +102,13 @@ Event 任务，这里的任务主要是耗时任务，主要分为普通耗时�
    * 命令接收方法
     ```Java
     @Override
-    public void onHandCmd(int cmdId, Object data) {
-    }
+    public void onHandCmd(int cmdId, Object data) {}
     ```
     
    * 任务接收方法
     ```Java
     @Override
-    public void eventHandle(int taskId, Object data) {
-      //在此更新UI
-    }
+    public void eventHandle(int taskId, Object data) {  //在此更新UI  }
     ```
    回到上面说的HTTP任务，任务完成后回到了activity中，Activity源码附上：
    
@@ -214,6 +208,7 @@ Event 任务，这里的任务主要是耗时任务，主要分为普通耗时�
     public void onHandCmd(int i, Object o) {
     }
 
+   //任务完成接收的地方，这里跟任务关联起来了
     @Override
     public void eventHandle(int i, Object o) {
         if (i == TASK_ID) {
@@ -233,6 +228,7 @@ Event 任务，这里的任务主要是耗时任务，主要分为普通耗时�
         }
     }
 
+   //任务失败，或者任务错误回调
     @Override
     public void eventError(int i, int i1, String s) {
         if (i == TASK_ID) {
@@ -318,9 +314,46 @@ Event 任务，这里的任务主要是耗时任务，主要分为普通耗时�
 命令
 ========
 * 命令的发送
-
-
-
+  首先构造一个命令，指定他的命令ID
+   ```Java
+   Cmd cmd=new Cmd(1001);
+   cmd.setData("我是命令携带数据");
+   ```
+   这样构造好了一个命令之后接下来就是把这个命令发送出去：
+   a 如果在Activity或者Fragment中直接调用此方法：
+   ```Java
+     sendCommand(cmd);
+   ```
+   b 如果不是在activity或者fragment中，则没有该方法的实现，需要从中介者中去调用方法，具体发送方法如下：
+   ```Java
+     Mediator.getInstance().sendCommand(cmd);
+   ```
+   这样就将命令发送出去了.
+   
 * 命令的接收
-
-
+   命令的接收只能在Activity和Fragment中，这个是前提：
+   首先注册接收命令：
+   ```Java
+   @Override
+    public int[] registReceiveCmdIds() {
+        return new int[]{1001};
+    }
+   ```
+   这里注册了接收的命令ID为1001，当然可以接收很多个命令
+   
+   只要注册后，命令在其他地方已发送，这个界面将会收到命令，接收命令的入口：
+   ```Java
+   @Override
+    public void onHandCmd(int cmdId, Object o) {
+        if(cmdId==1001){
+            showToast(o.toString());
+        }
+    }
+   ``` 
+   可以测试在这里成功收到了命令，当然同一个界面可以自己给自己发送命令，但是不建议，因为没必要，直接调方法就可以。命令主要用在不同界面或者非UI任务通知UI的时候用到。
+   
+3、View注解
+  注解这里就不再多说了，上面给出的Activity源码已经很好地给出了注解的应用，参照应用就可以了
+  
+  
+  

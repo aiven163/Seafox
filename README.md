@@ -1,20 +1,22 @@
 # Seafox
-this is a basic app framework
 
-这是一个简单的App框架，主要实现功能如下：
 
-1、HTTP  主要集合volley框架
-2、View  通过注解对Activity和Fragment中的View赋值，不用再通过findViewById去获取
-3、Command  命令，主要用于Activity，Fragment各自之间的通信
-4、Event 在下面讲解
+这是一个简单的App框架，主要实现功能如下：<br/>
 
+1、HTTP  主要集合volley框架<br/>
+2、View  通过注解对Activity和Fragment中的View赋值，不用再通过findViewById去获取<br/>
+3、Command  命令，主要用于Activity，Fragment各自之间的通信<br/>
+4、Event 在下面讲解<br/>
+
+
+任务
+==============
 
 Event 任务，这里的任务主要是耗时任务，主要分为普通耗时任务和网络耗时任务，均在子线程中执行，执行完毕后
 通知View层
 
-
-1、网络任务：
-   编写一个网络任务类，继承自HttpEvent。
+1、网络任务：<br/>
+   编写一个网络任务类，继承自HttpEvent。<br/>
    实例如下：
    
    ```Java 
@@ -74,9 +76,9 @@ Event 任务，这里的任务主要是耗时任务，主要分为普通耗时�
 
 ```
 
-  任务类编写完成了，那么怎么在Activity中使用呢？
+  任务类编写完成了，那么怎么在Activity中使用呢？<br/>
   我们需要编写一个Activity继承自BaseActivity，实现父类的方法，然后在需要执行任务的地方，实例化该任务，并且添加任务参数，最后调用该任务的excute()放假，既可以开始执行任务。这里注意，如果是Fragment则继承自BaseFragment<br>
-  我们可以看到activity从父类继承下来了很多方法。下面先介绍一下吧
+  我们可以看到activity从父类继承下来了很多方法。下面先介绍一下吧<br/>
   
   
   
@@ -319,7 +321,7 @@ Event 任务，这里的任务主要是耗时任务，主要分为普通耗时�
    Cmd cmd=new Cmd(1001);
    cmd.setData("我是命令携带数据");
    ```
-   这样构造好了一个命令之后接下来就是把这个命令发送出去：
+   这样构造好了一个命令之后接下来就是把这个命令发送出去：<br/>
    a 如果在Activity或者Fragment中直接调用此方法：
    ```Java
      sendCommand(cmd);
@@ -352,7 +354,8 @@ Event 任务，这里的任务主要是耗时任务，主要分为普通耗时�
    ``` 
    可以测试在这里成功收到了命令，当然同一个界面可以自己给自己发送命令，但是不建议，因为没必要，直接调方法就可以。命令主要用在不同界面或者非UI任务通知UI的时候用到。
    
-3、View注解
+View注解
+=========
   注解这里就不再多说了，上面给出的Activity源码已经很好地给出了注解的应用，参照应用就可以了
   
   

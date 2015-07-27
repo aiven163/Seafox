@@ -113,5 +113,214 @@ Event 任务，这里的任务主要是耗时任务，主要分为普通耗时�
     ```Java
     @Override
     public void eventHandle(int taskId, Object data) {
+      //在此更新UI
     }
     ```
+   回到上面说的HTTP任务，任务完成后回到了activity中，Activity源码附上：
+   
+   ```Java
+   @ELayout(Layout = R.layout.activity_main)
+   public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener,               MeiZAdapter.OnTapClickListener {
+
+    private static final int TASK_ID = 100;
+
+    @EWidget(id = R.id.tmpIv)
+    private ImageView mTmpIv;
+
+    @EWidget(id = R.id.appBarLayout)
+    private AppBarLayout mAppBar;
+
+    @EWidget(id = R.id.toolBar)
+    private Toolbar mToolBar;
+
+    @EWidget(id = R.id.swip)
+    private SwipeRefreshLayout mRefreshView;
+
+    @EWidget(id = R.id.recyView)
+    private RecyclerView mRecyclerView;
+
+    private ImgGetEvent event;
+    private List<ImgBase> dataList;
+    private MeiZAdapter mAdapter;
+
+    private boolean mIsFirstTimeTouchBottom = true;
+
+    private int mCurrentType = 1;
+    private int mCurrentIndex = 1;
+    private boolean noMore = false;
+
+    @Override
+    public void initView(View view, Bundle bundle) {
+        setSupportActionBar(mToolBar);
+        LogConfig.Debug = true;
+        if (Build.VERSION.SDK_INT >= 21) {
+            mAppBar.setElevation(10.6f);
+        }
+        initUI();
+    }
+
+    @Override
+    public void initData(Bundle bundle) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                requestData(mCurrentType, mCurrentIndex);
+            }
+        }, 100);
+    }
+
+
+    private void initUI() {
+        mRefreshView.setColorSchemeColors(
+                getResources().getColor(R.color.md_red_100),
+                getResources().getColor(R.color.md_red_300),
+                getResources().getColor(R.color.md_red_500),
+                getResources().getColor(R.color.md_red_800)
+        );
+        mRefreshView.setOnRefreshListener(this);
+        final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(
+                2, StaggeredGridLayoutManager.VERTICAL
+        );
+        mRecyclerView.setLayoutManager(layoutManager);
+        dataList = new ArrayList<>();
+        mAdapter = new MeiZAdapter(dataList, this, this);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (!mRefreshView.isRefreshing() && layoutManager.findLastCompletelyVisibleItemPositions(
+                        new int[2]
+                )[1] >= mAdapter.getItemCount() - 2) {
+                    if (noMore) {
+                        return;
+                    }
+                    if (!mIsFirstTimeTouchBottom) {
+                        mRefreshView.setRefreshing(true);
+                        requestData(mCurrentType, mCurrentIndex);
+                    } else {
+                        mIsFirstTimeTouchBottom = false;
+                    }
+                }
+            }
+        });
+    }
+
+    @Override
+    public int[] registReceiveCmdIds() {
+        return new int[0];
+    }
+
+    @Override
+    public void onHandCmd(int i, Object o) {
+    }
+
+    @Override
+    public void eventHandle(int i, Object o) {
+        if (i == TASK_ID) {
+            Response response = (Response) o;
+            List<ImgBase> tmpList = (List<ImgBase>) response.getDataObj();
+            if (response.getPageInfo().currentPageIndex == 1) {
+                dataList.clear();
+            }
+            dataList.addAll(tmpList);
+            mAdapter.update(dataList);
+            mRefreshView.setRefreshing(false);
+            if (tmpList.size() == 0) {
+                noMore = true;
+                showToast("全部加载完毕");
+            }
+            mCurrentIndex = response.getPageInfo().currentPageIndex + 1;
+        }
+    }
+
+    @Override
+    public void eventError(int i, int i1, String s) {
+        if (i == TASK_ID) {
+            mRefreshView.setRefreshing(false);
+            showToast("请求失败");
+        }
+    }
+
+    @Override
+    public void onRefresh() {
+        mCurrentIndex = 1;
+        noMore = false;
+        requestData(mCurrentType, mCurrentIndex);
+    }
+
+    private void requestData(final int type, final int pageIndex) {
+        mRefreshView.setRefreshing(true);
+        event = new ImgGetEvent(TASK_ID, panelName, type, pageIndex);
+        event.excute();
+    }
+
+    @Override
+    public void onClick(final ImgBase base, final View view) {
+        Picasso.with(MainActivity.this).load(base.getNomalImgUrl()).into(
+                mTmpIv, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        Intent i = new Intent(MainActivity.this, ImgShowAct.class);
+                        Bundle bd = new Bundle();
+                        bd.putSerializable("data", base);
+                        i.putExtras(bd);
+                        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                                MainActivity.this, view, ImgShowAct.TRANSIT_PIC
+                        );
+                        ActivityCompat.startActivity(
+                                MainActivity.this, i, optionsCompat.toBundle()
+                        );
+                    }
+
+                    @Override
+                    public void onError() {
+                    }
+                }
+        );
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int type = mCurrentType;
+        switch (item.getItemId()) {
+            case R.id.item_meinv://美女
+                mCurrentType = 3;
+                break;
+            case R.id.item_huahui://花卉
+                mCurrentType = 4;
+                break;
+            case R.id.item_fenjing://风景
+                mCurrentType = 2;
+                break;
+            case R.id.item_meishi://美食
+                mCurrentType = 1546;
+                break;
+        }
+        if (type != mCurrentType) {
+            mRecyclerView.smoothScrollToPosition(0);
+            mCurrentIndex = 1;
+            requestData(mCurrentType, mCurrentIndex);
+        }
+        return true;
+    }
+  }
+  ```
+2、普通任务，
+   普通任务继承自CommonEvent，方法基本和HTTP任务相似，具体操作不再给出实例了。
+   
+
+命令
+========
+* 命令的发送
+
+
+
+* 命令的接收
+
+

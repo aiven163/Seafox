@@ -17,7 +17,7 @@ Event 任务，这里的任务主要是耗时任务，主要分为普通耗时�
    编写一个网络任务类，继承自HttpEvent。
    实例如下：
    
-            
+   ```Java 
    
    public class ImgGetEvent extends HttpEvent {
     private int cid;
@@ -69,7 +69,6 @@ Event 任务，这里的任务主要是耗时任务，主要分为普通耗时�
     public ArrayList<EventParam> paramNextEventParam(ArrayList<EventParam> arrayList) {
         return null;
     }
-    
     ```
 
 }

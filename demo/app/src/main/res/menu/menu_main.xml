@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+    <item
+        android:id="@+id/item_meinv"
+        android:orderInCategory="1"
+        android:title="美女"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_fenjing"
+        android:orderInCategory="2"
+        android:title="风景"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_huahui"
+        android:orderInCategory="3"
+        android:title="花卉"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_meishi"
+        android:orderInCategory="4"
+        android:title="美食"
+        app:showAsAction="never" />
+</menu>

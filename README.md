@@ -1,5 +1,8 @@
 # Seafox
 
+作者：Aiven
+联系方式：aiven163@sina.com
+
 
 这是一个简单的App框架，主要实现功能如下：<br/>
 

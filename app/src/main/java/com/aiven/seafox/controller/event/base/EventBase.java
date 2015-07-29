@@ -23,8 +23,8 @@ public abstract class EventBase extends Thread implements Serializable {
 	public static final long serialVersionUID = -2425922859787509064L;
 	protected int eventId;
 	protected String PanelName;
-	protected int excuteOverCmd = -1;
-	protected Object excuteOverCmdData = null;
+	protected int executeOverCmd = -1;
+	protected Object executeOverCmdData = null;
 	protected ArrayList<EventParam> params;
 
 	/**
@@ -66,16 +66,16 @@ public abstract class EventBase extends Thread implements Serializable {
 	 * @param cmdId
 	 */
 	public void setExucteOverCmd(int cmdId) {
-		this.excuteOverCmd = cmdId;
+		this.executeOverCmd = cmdId;
 	}
 
 	/**
 	 * 设置任务执行完毕后，所发命令携带信息
 	 * setExcuteOverCmdData
-	 * @param excuteOverCmdData
+	 * @param executeOverCmdData
 	 */
-	public void setExcuteOverCmdData(Object excuteOverCmdData) {
-		this.excuteOverCmdData = excuteOverCmdData;
+	public void setExcuteOverCmdData(Object executeOverCmdData) {
+		this.executeOverCmdData = executeOverCmdData;
 	}
 
 	public void addParam(String key, int value) {
@@ -121,13 +121,13 @@ public abstract class EventBase extends Thread implements Serializable {
 
 	protected void eventOver(Object overData) {
 		taskToUI(overData);
-		if (excuteOverCmd != -1) {
-			Cmd cmd = new Cmd(excuteOverCmd);
+		if (executeOverCmd != -1) {
+			Cmd cmd = new Cmd(executeOverCmd);
 			cmd.setData(prepareCmdData(overData));
 			sendCommand(cmd);
 		}
 		if (this.nextEvent != null) {
-			ArrayList<EventParam> list = paramNextEventParam(nextEvent.params);
+			ArrayList<EventParam> list = nextEventParam(nextEvent.params);
 			if (list != null && list.size() > 0) {
 				for (int i = 0; i < list.size(); i++) {
 					this.nextEvent.addParam(list.get(i));
@@ -182,6 +182,6 @@ public abstract class EventBase extends Thread implements Serializable {
 	 * paramNextEventParam
 	 * @return
 	 */
-	abstract public ArrayList<EventParam> paramNextEventParam(ArrayList<EventParam> params);
+	abstract public ArrayList<EventParam> nextEventParam(ArrayList<EventParam> params);
 
 }

@@ -31,8 +31,8 @@ public abstract class HttpEvent extends EventBase implements com.aiven.seafox.co
     private static final long serialVersionUID = -20693265516115800L;
     private Request mRequest;
 
-    public HttpEvent(int id, String PanelName) {
-        super(id, PanelName);
+    public HttpEvent(int id, String panelName) {
+        super(id, panelName);
     }
 
     @Override

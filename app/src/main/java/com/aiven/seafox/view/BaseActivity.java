@@ -3,6 +3,8 @@ package com.aiven.seafox.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -69,7 +71,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IPanel {
 
     @Override
     public void recyclePanel() {
-
     }
 
     @Override
@@ -79,17 +80,17 @@ public abstract class BaseActivity extends AppCompatActivity implements IPanel {
         super.finish();
     }
 
-    public void sendCommand(Cmd cmd) {
+    public void sendCommand(@NonNull Cmd cmd) {
         Mediator.getInstance().sendCommand(cmd);
     }
 
     @Override
-    public void showToast(int resId) {
+    public void showToast(@StringRes int resId) {
         ToastUtil.showToast(this, resId);
     }
 
     @Override
-    public void showToast(String msg) {
+    public void showToast(@NonNull String msg) {
         ToastUtil.showToast(this, msg);
     }
 

@@ -3,6 +3,8 @@ package com.aiven.seafox.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -89,20 +91,19 @@ public abstract class BaseFragment extends Fragment implements IPanel {
 
     @Override
     public void recyclePanel() {
-
     }
 
-    public void sendCommand(Cmd cmd) {
+    public void sendCommand(@NonNull Cmd cmd) {
         Mediator.getInstance().sendCommand(cmd);
     }
 
     @Override
-    public void showToast(int resId) {
+    public void showToast(@StringRes int resId) {
         ToastUtil.showToast(resId);
     }
 
     @Override
-    public void showToast(String msg) {
+    public void showToast(@NonNull String msg) {
         ToastUtil.showToast(msg);
     }
 

@@ -71,7 +71,7 @@ Event 任务，这里的任务主要是耗时任务，主要分为普通耗时�
      * @return
      */
     @Override
-    public ArrayList<EventParam> paramNextEventParam(ArrayList<EventParam> arrayList) {
+    public ArrayList<EventParam> nextEventParam(ArrayList<EventParam> arrayList) {
         return null;
     }
 

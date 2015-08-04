@@ -12,6 +12,11 @@
 4、Event 在下面讲解<br/>
 
 
+如果你使用的是Android Studio开发项目，可以直接在你app中的build.gradle的dependencies{}中添加代码:<br/>
+
+compile 'com.aiven.seafox:seafox:1.0.0'
+
+
 任务
 ==============
 

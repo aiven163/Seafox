@@ -3,6 +3,7 @@
 作者：Aiven <br>
 联系方式：aiven163@sina.com  <br>
 
+# Description
 
 这是一个简单的App框架，主要实现功能如下：<br/>
 
@@ -11,10 +12,12 @@
 3、Command  命令，主要用于Activity，Fragment各自之间的通信<br/>
 4、Event 在下面讲解<br/>
 
+### 使用方式
 
-如果你使用的是Android Studio开发项目，可以直接在你app中的build.gradle的dependencies{}中添加代码:<br/>
-
-compile 'com.aiven.seafox:seafox:1.0.0'
+* 如果使用的是Eclipse，请下载作为一个library 工程使用 <br/>
+* 如果你使用的是Android Studio开发项目，可以直接在你app中的build.gradle的dependencies{}中添加代码:<br/>
+  
+    `compile 'com.aiven.seafox:seafox:1.0.0'`
 
 
 任务

@@ -6,8 +6,7 @@ import java.io.Serializable;
  * 
  * @author Aiven
  * @email aiven163@sina.com
- * @date 2015-6-21  下午4:11:23
- * @project  app框架
+ * @date 2015-6-21  pm 4:11:23
  * @desc
  */
 public interface IFuntion<T> extends Serializable {

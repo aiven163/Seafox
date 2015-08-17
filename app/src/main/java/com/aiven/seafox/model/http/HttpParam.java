@@ -4,12 +4,11 @@ import java.io.Serializable;
 
 /**
  * 参数
- * @项目名称   你我金融 APP客户端(Android)
- * @类名称   EventParam  
- * @创建人   Aiven
+ * @ClassName   EventParam
+ * @Author   Aiven
  * @Email  aiven163@sina.com
- * @创建时间 2015-6-24 下午2:25:31 
- * @类描述   TODO
+ * @CreateTime 2015-6-24 PM 2:25:31
+ * @Desc   TODO
  */
 public class HttpParam implements Serializable {
 

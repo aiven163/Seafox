@@ -12,7 +12,7 @@ public class Observer implements Serializable {
 	/**
 	 * @author Aiven
 	 * @email aiven163@sina.com
-	 * @date 2015-6-21 下午4:10:11
+	 * @date 2015-6-21 pm 4:10:11
 	 * @desc
 	 */
 	private static final long serialVersionUID = -6004755843734333420L;

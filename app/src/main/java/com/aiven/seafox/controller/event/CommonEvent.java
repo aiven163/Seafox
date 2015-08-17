@@ -7,13 +7,12 @@ import java.util.ArrayList;
 
 
 /**
- * 普通耗时事件
- * @项目名称   你我金融 APP客户端(Android)
- * @类名称   CommonEvent  
- * @创建人   Aiven
+ * The Common ime consuming Event
+ * @ClassName   CommonEvent
+ * @Author   Aiven
  * @Email  aiven163@sina.com
- * @创建时间 2015-6-24 下午4:56:37 
- * @类描述   TODO
+ * @CreateTime 2015-6-24 pm 4:56:37
+ * @desc   TODO
  */
 public abstract class CommonEvent extends EventBase {
 
@@ -38,7 +37,7 @@ public abstract class CommonEvent extends EventBase {
 	}
 
 	/**
-	 * 任务执行，并且在本线程中执行，执行完毕返回数据
+	 * Task execution, and execution, in this thread for the returned data
 	 * excuteBackData
 	 * @param paramList
 	 * @return
@@ -46,7 +45,7 @@ public abstract class CommonEvent extends EventBase {
 	public abstract Object excuteBackData(ArrayList<EventParam> paramList);
 
 	/**
-	 * 异常
+	 * exception
 	 * error
 	 * @param errorCode
 	 * @param errorInfo

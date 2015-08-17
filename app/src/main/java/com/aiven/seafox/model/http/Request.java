@@ -4,11 +4,10 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 /**
- * Http网络请求封装实体
+ * Http Network request encapsulate entity
  * @author Aiven
  * @email aiven163@sina.com
  * @date 2015-6-14  上午11:06:33
- * @project  app框架
  * @desc
  */
 public class Request implements Serializable {

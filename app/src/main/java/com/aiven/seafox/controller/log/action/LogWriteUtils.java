@@ -2,12 +2,12 @@ package com.aiven.seafox.controller.log.action;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.PrintWriter;
 
 import android.os.Environment;
 
 import com.aiven.seafox.controller.log.LogConfig;
 import com.aiven.seafox.controller.log.model.LogMode;
+import com.aiven.seafox.controller.log.util.LogPrintWriter;
 import com.aiven.seafox.controller.log.util.LogTimeUtils;
 
 
@@ -19,7 +19,7 @@ import com.aiven.seafox.controller.log.util.LogTimeUtils;
  */
 public class LogWriteUtils extends Thread {
 
-	private PrintWriter mOs;
+	private LogPrintWriter mOs;
 	private LogCheckListListener listener;
 
 	public LogWriteUtils(LogCheckListListener listener) {
@@ -42,9 +42,7 @@ public class LogWriteUtils extends Thread {
 		if (mode == null)
 			return;
 		try {
-			if (mOs == null || !checkFile()) {
-				initOs();
-			}
+			initOs(mode);
 			if (mOs != null) {
 				mOs.println(mode.getTime() + "  " + mode.getTag() + "  " + mode.getMsg());
 				mOs.flush();
@@ -57,9 +55,29 @@ public class LogWriteUtils extends Thread {
 		}
 	}
 
-	private void initOs() {
-		String filePath = LogConfig.SAVE_PATH + LogTimeUtils.getInstance().getData() + ".txt";
+	private void initOs(LogMode mode) {
+		String filePath;
+		if (mode.isCrashInfo()) {
+			filePath = LogConfig.getLogSavePath() + "crash" + File.separator + LogTimeUtils.getInstance().getData() + ".txt";
+		} else {
+			filePath = LogConfig.getLogSavePath() + LogTimeUtils.getInstance().getData() + ".txt";
+		}
 		File f = new File(filePath);
+		if (checkFile(f)) {// 如果文件存在
+			if (mOs != null) {// 如果文件流已经打开
+				if ((mOs.isCrashWriter() && mode.isCrashInfo()) || (!mOs.isCrashWriter() && !mode.isCrashInfo())) {
+					// 要么同时时崩溃，要么同时不失崩溃
+					return;
+				} else {
+					try {
+						mOs.close();
+					} catch (Exception e) {
+					} finally {
+						mOs = null;
+					}
+				}
+			}
+		}
 		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 			try {
 				if (!f.exists()) {
@@ -70,19 +88,20 @@ public class LogWriteUtils extends Thread {
 					}
 					f.createNewFile();
 				}
-				mOs = new PrintWriter(new FileOutputStream(f, true));
+				mOs = new LogPrintWriter(new FileOutputStream(f, true));
 			} catch (Exception e) {
 				e.printStackTrace();
 				mOs = null;
+			} finally {
+				f = null;
 			}
 		} else {
 			mOs = null;
+			f = null;
 		}
 	}
 
-	private boolean checkFile() {
-		String filePath = LogConfig.SAVE_PATH + LogTimeUtils.getInstance().getData() + ".txt";
-		File f = new File(filePath);
+	private boolean checkFile(File f) {
 		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 			try {
 				if (!f.exists()) {
@@ -92,15 +111,15 @@ public class LogWriteUtils extends Thread {
 				}
 			} catch (Exception e) {
 				return false;
-			} finally {
-				f = null;
 			}
 		} else {
 			f = null;
 		}
 		return false;
 	}
+
 	public void startEngine() {
 		start();
 	}
+
 }

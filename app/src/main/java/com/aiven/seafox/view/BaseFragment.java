@@ -20,11 +20,11 @@ import com.aiven.seafox.controller.util.ToastUtil;
 import com.aiven.seafox.controller.util.ViewUtil;
 
 /**
- * 所有Fragment基类
+ * all Fragment basic class
  *
  * @author Aiven
  * @email aiven163@sina.com
- * @date 2014-11-19 下午2:32:08
+ * @date 2014-11-19 PM 2:32:08
  * @desc
  */
 public abstract class BaseFragment extends Fragment implements IPanel {
@@ -72,7 +72,7 @@ public abstract class BaseFragment extends Fragment implements IPanel {
     }
 
     /**
-     * 获取Mediator中间件的名称,这里的一个Mediator就是一个Activity
+     * Get the name of the Mediator middleware, here's a Mediator is an Activity
      */
     @Override
     public String getPanelName() {

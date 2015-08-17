@@ -46,7 +46,7 @@ public class BaseApplication extends Application {
     }
 
     /**
-     * 返回数据存储根目录
+     * Returns the data storage root directory
      *
      * @return
      */

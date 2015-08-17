@@ -10,12 +10,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * 动作事件
+ * Event Base class
  * 
  * @author Aiven
  * @email aiven163@sina.com
- * @date 2015-6-21 下午3:40:02
- * @project app框架
+ * @date 2015-6-21 pm 3:40:02
  * @desc
  */
 public abstract class EventBase extends Thread implements Serializable {
@@ -28,7 +27,7 @@ public abstract class EventBase extends Thread implements Serializable {
 	protected ArrayList<EventParam> params;
 
 	/**
-	 * 下一个任务
+	 * next event
 	 */
 	protected EventBase nextEvent;
 
@@ -43,7 +42,7 @@ public abstract class EventBase extends Thread implements Serializable {
 	}
 
 	/**
-	 * 增加下一个执行任务
+	 * add next action event
 	 * addNextEvent
 	 * @param nextEvent
 	 */
@@ -61,7 +60,7 @@ public abstract class EventBase extends Thread implements Serializable {
 	}
 
 	/**
-	 * 设置任务完毕后所需要发送的命令，只有任务成功执行完毕后才会发送
+	 * Set up after the completion of the task needs to be sent by the command, sent only after the task successfully
 	 * setExucteOverCmd
 	 * @param cmdId
 	 */
@@ -70,7 +69,7 @@ public abstract class EventBase extends Thread implements Serializable {
 	}
 
 	/**
-	 * 设置任务执行完毕后，所发命令携带信息
+	 * Set after the completion of the task, carry the information issued by the command
 	 * setExcuteOverCmdData
 	 * @param executeOverCmdData
 	 */
@@ -178,7 +177,7 @@ public abstract class EventBase extends Thread implements Serializable {
 	abstract public void syncEventExcute(ArrayList<EventParam> paramList);
 
 	/**
-	 * 准备下一个任务参数
+	 * prepare next event's parameters
 	 * paramNextEventParam
 	 * @return
 	 */

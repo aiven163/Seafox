@@ -11,21 +11,21 @@ public interface IMediator {
 	void init();
 
 	/**
-	 * 注册面板
+	 * regist the pannel
 	 * registPanel
 	 * @param panel
 	 */
 	void registPanel(IPanel panel);
 
 	/**
-	 * 移除面板
+	 * remove the pannel
 	 * removePanel
 	 * @param panelName
 	 */
 	void removePanel(String panelName);
 
 	/**
-	 * 根据命令名称获取所有的观察者
+	 * According to the command name for all observers
 	 * getCmdObservers
 	 * @param cmdId
 	 * @return
@@ -33,7 +33,7 @@ public interface IMediator {
 	HashMap<String, Observer> getCmdObservers(int cmdId);
 
 	/**
-	 * 根据面板名称，查找面板
+	 * According to the name of the panel,search the  panel
 	 * findPanelByName
 	 * @param panelName
 	 * @return
@@ -41,7 +41,7 @@ public interface IMediator {
 	IPanel findPanelByName(String panelName);
 
 	/**
-	 * 发送命令
+	 * send command
 	 * sendCommand
 	 * @param cmd
 	 */

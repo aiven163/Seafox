@@ -8,11 +8,11 @@ import com.aiven.seafox.controller.BaseApplication;
 
 /**
  * 
- * @类名称   ToastUtil  
- * @创建人   Aiven
+ * @ClassName   ToastUtil
+ * @Author   Aiven
  * @Email  aiven163@sina.com
- * @创建时间 2015-6-25 下午2:06:06 
- * @类描述  Toast工具类
+ * @CreateTime 2015-6-25 PM 2:06:06
+ * @Desc  Toast util
  */
 public class ToastUtil {
 

@@ -16,14 +16,13 @@ import java.util.Map;
 
 
 /**
- * Http 网络任务
+ * Http net Event
  *
- * @项目名称 你我金融 APP客户端(Android)
- * @类名称 HttpEvent
- * @创建人 Aiven
+ * @ClassName HttpEvent
+ * @Author Aiven
  * @Email aiven163@sina.com
- * @创建时间 2015-6-24 下午4:13:29
- * @类描述 TODO
+ * @CreateTime 2015-6-24 pm 4:13:29
+ * @Desc TODO
  */
 public abstract class HttpEvent extends EventBase implements com.aiven.seafox.controller.http.volley.Response.Listener<String>,
         com.aiven.seafox.controller.http.volley.Response.ErrorListener {
@@ -111,5 +110,6 @@ public abstract class HttpEvent extends EventBase implements com.aiven.seafox.co
     abstract public Request paramRequest(ArrayList<EventParam> paramList);
 
     abstract public Response analysisData(String data) throws EventException;
+
 
 }

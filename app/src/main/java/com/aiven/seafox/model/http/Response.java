@@ -3,12 +3,11 @@ package com.aiven.seafox.model.http;
 import java.io.Serializable;
 
 /**
- * http网络请求响应实体
+ * The HTTP request and response network entities
  *
  * @author Aiven
  * @email aiven163@sina.com
- * @date 2015-6-14  上午11:08:11
- * @project app框架
+ * @date 2015-6-14  PM 11:08:11
  * @desc
  */
 public class Response implements Serializable {
@@ -18,6 +17,7 @@ public class Response implements Serializable {
     private Object carryExtendObj;
     private Object dataObj;
     private PageInfo pageInfo;
+    private boolean isCacheData;//是否为缓存数据
 
     public long getRequestPipIndex() {
         return requestPipIndex;
@@ -49,5 +49,13 @@ public class Response implements Serializable {
 
     public void setPageInfo(PageInfo pageInfo) {
         this.pageInfo = pageInfo;
+    }
+
+    public boolean isCacheData() {
+        return isCacheData;
+    }
+
+    public void setIsCacheData(boolean isCacheData) {
+        this.isCacheData = isCacheData;
     }
 }

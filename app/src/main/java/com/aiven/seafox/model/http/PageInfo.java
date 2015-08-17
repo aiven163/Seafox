@@ -4,19 +4,19 @@ package com.aiven.seafox.model.http;
  * Author: Aiven
  * Email : aiven163@sina.com
  * Date : 2015/7/23  16:34
- * Desc : 翻页信息
+ * Desc : page information
  */
 public class PageInfo {
     /**
-     * 总页数
+     *
      */
     public int totallPages;
     /**
-     * 没页条数
+     * Number each page
      */
     public int pageItemSize;
     /**
-     * 当前请求索引
+     * Index of the current request
      */
     public int currentPageIndex;
 }

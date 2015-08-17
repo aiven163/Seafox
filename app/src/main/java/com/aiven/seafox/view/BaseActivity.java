@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.aiven.seafox.controller.Mediator;
 import com.aiven.seafox.controller.cmd.Cmd;
@@ -18,11 +20,11 @@ import com.aiven.seafox.controller.util.ToastUtil;
 import com.aiven.seafox.controller.util.ViewUtil;
 
 /**
- * 所有Activity基类
+ * all Activity basic class
  *
  * @author Aiven
  * @email aiven163@sina.com
- * @date 2014-11-19 下午2:32:08
+ * @date 2014-11-19 PM 2:32:08
  */
 public abstract class BaseActivity extends AppCompatActivity implements IPanel {
     private View rootView = null;
@@ -33,6 +35,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IPanel {
         super.onCreate(arg0);
         try {
             createPanelName();
+            if (isFullScreen()) {
+                this.requestWindowFeature(Window.FEATURE_NO_TITLE);//去掉标题栏
+                this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//去掉信息栏
+            }
             ViewUtil.initWindow(this);
             rootView = getWindow().getDecorView();
             Mediator.getInstance().registPanel(this);
@@ -110,6 +116,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IPanel {
             intent.putExtras(bd);
         }
         startActivityForResult(intent, requestCode);
+    }
+
+    public boolean isFullScreen() {
+        return false;
     }
 
 }

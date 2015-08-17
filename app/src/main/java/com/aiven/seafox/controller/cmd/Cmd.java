@@ -8,7 +8,7 @@ public class Cmd implements ICommand {
 	/**
 	 * @author Aiven
 	 * @email aiven163@sina.com
-	 * @date 2015-6-21 下午4:50:09
+	 * @date 2015-6-21 pm 4:50:09
 	 * @desc
 	 */
 	private static final long serialVersionUID = -862357805282310897L;

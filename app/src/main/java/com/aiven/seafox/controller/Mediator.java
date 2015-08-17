@@ -13,11 +13,11 @@ import com.aiven.seafox.controller.util.Tags;
 import java.util.HashMap;
 
 /**
- * @类名称   Mediator
- * @创建人   Aiven
+ * @ClassName   Mediator
+ * @Author   Aiven
  * @Email  aiven163@sina.com
- * @创建时间 2015-6-25 下午1:52:34
- * @类描述   中介者
+ * @CreateTime 2015-6-25 下午1:52:34
+ * @Desc   Mediator
  */
 public class Mediator implements IMediator {
 

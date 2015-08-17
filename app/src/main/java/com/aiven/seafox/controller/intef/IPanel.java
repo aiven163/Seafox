@@ -7,14 +7,13 @@ import android.view.View;
 /**
  * @author Aiven
  * @email aiven163@sina.com
- * @date 2015-6-21 下午3:38:37
- * @project app框架
- * @desc 界面底层接口
+ * @date 2015-6-21 pm 3:38:37
+ * @desc the acivity or Fragment base pannel interface
  */
 public interface IPanel {
 
     /**
-     * 初始化界面控件
+     * Initialize the all view component
      *
      * @param view
      * @param onSaveInstance
@@ -22,32 +21,32 @@ public interface IPanel {
     public void initView(View view, Bundle onSaveInstance);
 
     /**
-     * 初始化数据
+     * Initialize the data
      * @param onSaveInstance
      */
     public void initData(Bundle onSaveInstance);
 
     /**
-     * 获取界面名称
+     * get the pannel name
      *
      * @return
      */
     public String getPanelName();
 
     /**
-     * 构建界面名称
+     * create the pannel name
      */
     public void createPanelName();
 
     /**
-     * 注册当前UI所需要接收的命令
+     * Register the current UI needs to receive the order ids
      *
      * @return
      */
     public int[] registReceiveCmdIds();
 
     /**
-     * 命令接收入口
+     * the callback of command
      *
      * @param cmdId
      * @param data
@@ -55,7 +54,7 @@ public interface IPanel {
     public void onHandCmd(int cmdId, Object data);
 
     /**
-     * 任务返回
+     * the callback or event
      * eventHandle
      *
      * @param eventId
@@ -64,12 +63,12 @@ public interface IPanel {
     public void eventHandle(int eventId, Object data);
 
     /**
-     * 失误失败错误
+     * the callback or exception
      * eventError
      *
-     * @param eventId  任务ID号
-     * @param errorCode  错误码
-     * @param reason   错误原因
+     * @param eventId  task id number
+     * @param errorCode  error code
+     * @param reason   the reason of the error
      */
     public void eventError(int eventId, int errorCode, String reason);
 
@@ -78,7 +77,7 @@ public interface IPanel {
     public void showToast(String msg);
 
     /**
-     * 界面跳转
+     * jump activity
      * startActivity
      *
      * @param cls
@@ -87,7 +86,7 @@ public interface IPanel {
     public void startActivity(Class<? extends Activity> cls, Bundle bd);
 
     /**
-     * 带返回的界面跳转
+     * jump activity with result data
      * startActivityForResult
      *
      * @param cls
@@ -97,7 +96,7 @@ public interface IPanel {
     public void startActivityForResult(Class<? extends Activity> cls, int requestCode, Bundle bd);
 
     /**
-     * 回收数据
+     * recycling the data
      */
     public void recyclePanel();
 

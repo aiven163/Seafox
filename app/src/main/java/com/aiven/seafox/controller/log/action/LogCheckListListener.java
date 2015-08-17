@@ -10,5 +10,5 @@ import com.aiven.seafox.controller.log.model.LogMode;
  * @Description 日志输出监听器
  */
 public interface LogCheckListListener {
-    LogMode backNextLog();
+	public LogMode backNextLog();
 }

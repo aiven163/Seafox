@@ -23,6 +23,11 @@ public class LogMode {
 	 */
 	private String time;
 
+	/**
+	 * 是否为崩溃信息
+	 */
+	private boolean isCrashInfo = false;
+
 	public LogMode(String tag, String msg) {
 		super();
 		this.tag = tag;
@@ -52,6 +57,14 @@ public class LogMode {
 
 	public void setTime(String time) {
 		this.time = time;
+	}
+
+	public boolean isCrashInfo() {
+		return isCrashInfo;
+	}
+
+	public void setCrashInfo(boolean isCrashInfo) {
+		this.isCrashInfo = isCrashInfo;
 	}
 
 }

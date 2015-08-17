@@ -10,12 +10,11 @@ import com.aiven.seafox.controller.cmd.observer.Observer;
 import com.aiven.seafox.controller.intef.IPanel;
 
 /**
- * 命令分发执行器
+ * Distribute actuator command
  *
  * @author Aiven
  * @email aiven163@sina.com
- * @date 2015-6-21 下午5:51:17
- * @project app框架
+ * @date 2015-6-21 pm 5:51:17
  * @desc
  */
 public class CmdSender extends Thread {
@@ -62,7 +61,7 @@ public class CmdSender extends Thread {
                                         dstObs.findCmd(Panel, cmd);
                                     }
                                 }
-                            } else {//指定发送给某一个Pannel
+                            } else {//Specify the send one Pannel
                                 dstObs = obs.get(cmd.getRecievePanelName());
                                 Panel = Mediator.getInstance().findPanelByName(cmd.getRecievePanelName());
                                 if (dstObs != null && Panel != null) {

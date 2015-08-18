@@ -17,7 +17,7 @@
 * 如果使用的是Eclipse，请下载作为一个library 工程使用 <br/>
 * 如果你使用的是Android Studio开发项目，可以直接在你app中的build.gradle的dependencies{}中添加代码:<br/>
   
-    `compile 'com.aiven.seafox:seafox:1.0.0'`
+    `compile 'com.aiven.seafox:Seafox:1.0.0'`
 
 
 # 具体介绍
